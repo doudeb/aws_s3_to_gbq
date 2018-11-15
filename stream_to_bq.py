@@ -8,15 +8,14 @@ import time
 import boto3
 import os
 
-# Google service account authentication is tricky.  It took us waaay too long to figure out how service-accounts could work in Lambda.
+# Google service account authentication is tricky.
 from googleapiclient import discovery
 from oauth2client.client import GoogleCredentials
 from google.cloud import bigquery
 from google.cloud.exceptions import NotFound
 
 logging.getLogger('googleapiclient.discovery').setLevel(logging.CRITICAL)
-# Using argument parsing doesn't make a lot of sense in Lambda context, but we'll leave the defaults in anyway.
-# It would make sense if you land up using this locally since you could run ./stream_to_bq.py --project_id etc... for testing purposes pre-Lambda.
+
 parser          = argparse.ArgumentParser()
 parser.add_argument('--project_id', help='BigQuery project ID.', default='sml-bi')
 parser.add_argument('--dataset_id', help='BigQuery dataset ID.', default='smlbi')
@@ -158,9 +157,7 @@ if args.file_name != False:
     push2gbg(args.file_name)
     print(message)
 
-# the "event" here is what gets passed from S3-notification.  In this case, all we're interested in is the S3 key name.
-# You'll need to make sure your Lambda function runs with a 'role' that allows it to read from your S3 bucket.
-# Your Lambda "Handler" should like stream_to_bq.handler, which means that the Lambda 'event' will be passed to our function called 'handler'.
+
 def handler(event, context):
     for record in event['Records']:
         bucket  = record['s3']['bucket']['name']
