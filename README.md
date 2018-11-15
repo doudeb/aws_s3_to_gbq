@@ -23,9 +23,9 @@ You can run localy with `./stream_to_bq.py --file_name file.txt --project_id pro
 4. Define a primary key
 You must add the pattern `primary_key` as descritption of your primary key column on your destination table.
 
-##Prepare a lambda package
+## Prepare a lambda package
 ```
 zip -r9 ../../s3tobq.zip *
 zip -g s3tobq.zip stream_to_bq.py auth.json
 ```
-##You are now ready to create your lambda package, refer to the aws lambda documentation for it
+## You are now ready to create your lambda package, refer to the aws lambda documentation for it
