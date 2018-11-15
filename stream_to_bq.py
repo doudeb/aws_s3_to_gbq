@@ -24,7 +24,7 @@ parser.add_argument('--table_name', help='Name of the table to load csv file int
 parser.add_argument('--file_name', help='Name of the file to load.', default=False)
 
 args            = parser.parse_args()
-client          = bigquery.Client.from_service_account_json('./SML-BI-7fdf10dda4d5.json')
+client          = bigquery.Client.from_service_account_json('./auth.json')
 
 
 try:
